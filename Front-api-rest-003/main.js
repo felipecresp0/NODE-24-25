@@ -18,12 +18,29 @@ function displayMovies(movies) {
         movieElement.classList.add("movie");
         movieElement.innerHTML = `
             <img src="${movie.imagen_url}" alt="${movie.titulo}">
-            <h3>${movie.titulo} (${movie.anio})</h3>
-            
+            <div class="movie-info">
+                <h3>${movie.titulo}</h3>
+                <p>Año: ${movie.anio}</p>
+                <p>Género: ${movie.genero}</p>
+                <button class="play-btn">▶ Reproducir</button>
+                <button class="fav-btn">❤️ Favorito</button>
+            </div>
         `;
+
+        // Evento para mostrar la información al pasar el mouse
+        movieElement.addEventListener("mouseover", () => {
+            movieElement.querySelector(".movie-info").style.opacity = "1";
+        });
+
+        // Evento para ocultar la información al salir el mouse
+        movieElement.addEventListener("mouseleave", () => {
+            movieElement.querySelector(".movie-info").style.opacity = "0";
+        });
+
         container.appendChild(movieElement);
     });
 }
+
 
 function searchMovies() {
     const query = document.getElementById("search").value;
