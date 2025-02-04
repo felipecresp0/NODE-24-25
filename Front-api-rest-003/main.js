@@ -12,7 +12,7 @@ function fetchMovies() {
 function displayMovies(movies) {
     const container = document.getElementById("movies-container");
     container.innerHTML = "";
-    
+
     movies.forEach(movie => {
         const movieElement = document.createElement("div");
         movieElement.classList.add("movie");
@@ -22,8 +22,8 @@ function displayMovies(movies) {
                 <h3>${movie.titulo}</h3>
                 <p>Año: ${movie.anio}</p>
                 <p>Género: ${movie.genero}</p>
-                <button class="play-btn">▶ Reproducir</button>
-                <button class="fav-btn">❤️ Favorito</button>
+                <button class="play-btn" onclick="playTrailer('${movie.trailer_url}')">▶ Reproducir</button>
+                <button class="fav-btn" onclick="addToFavorites('${movie.titulo}')">❤️ Favorito</button>
             </div>
         `;
 
@@ -40,6 +40,36 @@ function displayMovies(movies) {
         container.appendChild(movieElement);
     });
 }
+function playTrailer(trailerUrl) {
+    const modal = document.createElement("div");
+    modal.classList.add("modal");
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <iframe width="100%" height="400px" src="${trailerUrl}" frameborder="0" allowfullscreen></iframe>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+function closeModal() {
+    document.querySelector(".modal").remove();
+}
+function addToFavorites(movieTitle) {
+    alert(`${movieTitle} ha sido añadida a Favoritos`);
+}
+
+        // Evento para mostrar la información al pasar el mouse
+        movieElement.addEventListener("mouseover", () => {
+            movieElement.querySelector(".movie-info").style.opacity = "1";
+        });
+
+        // Evento para ocultar la información al salir el mouse
+        movieElement.addEventListener("mouseleave", () => {
+            movieElement.querySelector(".movie-info").style.opacity = "0";
+        });
+
+        container.appendChild(movieElement);
+        
 
 
 function searchMovies() {
