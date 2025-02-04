@@ -35,6 +35,18 @@ const pool = new Pool({
     // res.send("Bienvenido a mi API DISNEY");
 });
 
+app.get("/peliculas/trailers", async (req, res) => {
+    const {rows} = await pool.query(
+        "SELECT id, titulo, trailer_url FROM peliculas WHERE trailer_url IS NOT NULL;"
+    );
+    res.json(rows);
+    // res.send("Bienvenido a mi API DISNEY");
+  });
+  
+  
+  
+  
+
 
 app.get("/peliculas/genero/:genero", async (req, res) => {
     const { genero } = req.params;
